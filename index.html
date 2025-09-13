@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Колхозник - Свіжі Продукти</title>
+    <title>AgroLogistics - Перевезення сільгосппродукції</title>
     <style>
         * {
             margin: 0;
@@ -12,8 +12,8 @@
         }
         
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2E7D32 0%, #66BB6A 100%);
             color: #333;
             line-height: 1.6;
         }
@@ -22,17 +22,22 @@
             background: rgba(255, 255, 255, 0.95);
             padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
         
         .logo {
             font-size: 2.5em;
             font-weight: bold;
-            color: #4CAF50;
+            color: #2E7D32;
+        }
+        
+        .tagline {
+            color: #666;
+            margin-top: 10px;
         }
         
         .nav {
-            background: #388E3C;
+            background: #1B5E20;
             padding: 15px;
             text-align: center;
         }
@@ -40,8 +45,9 @@
         .nav a {
             color: white;
             text-decoration: none;
-            margin: 0 20px;
-            font-weight: bold;
+            margin: 0 25px;
+            font-weight: 500;
+            font-size: 1.1em;
         }
         
         .container {
@@ -52,322 +58,405 @@
         
         .hero {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
             color: white;
         }
         
         .hero h1 {
-            font-size: 3em;
+            font-size: 3.5em;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
         }
         
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-        
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3em;
-        }
-        
-        .product-title {
+        .hero p {
             font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #388E3C;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
         
-        .product-price {
-            font-size: 1.2em;
-            color: #E91E63;
+        .btn {
+            display: inline-block;
+            background: #FF6D00;
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #FF9100;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255,109,0,0.3);
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        
+        .service-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2E7D32;
             margin-bottom: 15px;
         }
         
-        .quantity {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .calculator {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .calculator h2 {
+            text-align: center;
+            color: #2E7D32;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1em;
+        }
+        
+        .form-group select:focus, .form-group input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        
+        .calculate-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+        
+        .calculate-btn:hover {
+            background: #45a049;
+        }
+        
+        .result {
+            background: #E8F5E9;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: center;
+            display: none;
+        }
+        
+        .result h3 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #FF6D00;
             margin: 15px 0;
         }
         
-        .quantity-btn {
-            width: 30px;
-            height: 30px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        .quantity-input {
-            width: 50px;
-            height: 30px;
-            text-align: center;
-            margin: 0 10px;
-            border: 2px solid #4CAF50;
-            border-radius: 5px;
-        }
-        
-        .add-to-cart {
-            background: #FF5722;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        
-        .cart {
+        .order-form {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 40px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
         
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .checkout-btn {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 20px;
-            width: 100%;
+        .order-form h2 {
+            text-align: center;
+            color: #2E7D32;
+            margin-bottom: 30px;
         }
         
         .footer {
-            background: #2E7D32;
+            background: #1B5E20;
             color: white;
             text-align: center;
-            padding: 30px;
-            margin-top: 50px;
+            padding: 40px;
+            margin-top: 60px;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .contact-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .contact-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="logo">🍅 КОЛХОЗНИК</div>
-        <p>Свіжі продукти прямо з поля</p>
+        <div class="logo">🚜 AgroLogistics</div>
+        <p class="tagline">Професійні перевезення сільгосппродукції</p>
     </div>
     
     <div class="nav">
-        <a href="#products">Продукти</a>
-        <a href="#cart">Кошик</a>
+        <a href="#services">Послуги</a>
+        <a href="#calculator">Розрахунок</a>
+        <a href="#order">Замовлення</a>
         <a href="#contact">Контакти</a>
     </div>
     
     <div class="hero">
-        <h1>СВІЖІСТЬ ТА ЯКІСТЬ</h1>
-        <p>Найкращі фермерські продукти з любов'ю до природи</p>
+        <h1>ПРОФЕСІЙНІ ПЕРЕВЕЗЕННЯ</h1>
+        <p>Сільгосппродукції по всій Україні та Європі</p>
+        <a href="#calculator" class="btn">Розрахувати вартість</a>
+        <a href="#order" class="btn">Замовити перевезення</a>
     </div>
     
     <div class="container">
-        <h2 id="products" style="text-align: center; margin: 40px 0; color: white;">Наші Продукти</h2>
-        
-        <div class="products">
-            <div class="product-card">
-                <div class="product-image">🍅</div>
-                <div class="product-title">Свіжі помідори</div>
-                <div class="product-price">45 грн/кг</div>
-                <div class="quantity">
-                    <button class="quantity-btn" onclick="changeQuantity('tomato', -1)">-</button>
-                    <input type="number" id="tomato-qty" class="quantity-input" value="0" min="0">
-                    <button class="quantity-btn" onclick="changeQuantity('tomato', 1)">+</button>
-                </div>
-                <button class="add-to-cart" onclick="addToCart('tomato', 'Помідори', 45)">В кошик</button>
-            </div>
+        <div id="services">
+            <h2 style="text-align: center; color: white; margin: 50px 0; font-size: 2.5em;">Наші Послуги</h2>
             
-            <div class="product-card">
-                <div class="product-image">🥒</div>
-                <div class="product-title">Огірки грунтові</div>
-                <div class="product-price">35 грн/кг</div>
-                <div class="quantity">
-                    <button class="quantity-btn" onclick="changeQuantity('cucumber', -1)">-</button>
-                    <input type="number" id="cucumber-qty" class="quantity-input" value="0" min="0">
-                    <button class="quantity-btn" onclick="changeQuantity('cucumber', 1)">+</button>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-icon">🌾</div>
+                    <div class="service-title">Перевезення зернових</div>
+                    <p>Пшениця, ячмінь, кукурудза, соя, ріпак</p>
+                    <p style="color: #FF6D00; font-weight: bold; margin-top: 15px;">від 5 грн/ткм</p>
                 </div>
-                <button class="add-to-cart" onclick="addToCart('cucumber', 'Огірки', 35)">В кошик</button>
-            </div>
-            
-            <div class="product-card">
-                <div class="product-image">🥔</div>
-                <div class="product-title">Молода картопля</div>
-                <div class="product-price">25 грн/кг</div>
-                <div class="quantity">
-                    <button class="quantity-btn" onclick="changeQuantity('potato', -1)">-</button>
-                    <input type="number" id="potato-qty" class="quantity-input" value="0" min="0">
-                    <button class="quantity-btn" onclick="changeQuantity('potato', 1)">+</button>
+                
+                <div class="service-card">
+                    <div class="service-icon">🥔</div>
+                    <div class="service-title">Овочі та фрукти</div>
+                    <p>Картопля, морква, цибуля, яблука, ягоди</p>
+                    <p style="color: #FF6D00; font-weight: bold; margin-top: 15px;">від 7 грн/ткм</p>
                 </div>
-                <button class="add-to-cart" onclick="addToCart('potato', 'Картопля', 25)">В кошик</button>
-            </div>
-            
-            <div class="product-card">
-                <div class="product-image">🥕</div>
-                <div class="product-title">Морква</div>
-                <div class="product-price">30 грн/кг</div>
-                <div class="quantity">
-                    <button class="quantity-btn" onclick="changeQuantity('carrot', -1)">-</button>
-                    <input type="number" id="carrot-qty" class="quantity-input" value="0" min="0">
-                    <button class="quantity-btn" onclick="changeQuantity('carrot', 1)">+</button>
+                
+                <div class="service-card">
+                    <div class="service-icon">🌻</div>
+                    <div class="service-title">Олійні культури</div>
+                    <p>Соняшник, ріпак, соя, льон</p>
+                    <p style="color: #FF6D00; font-weight: bold; margin-top: 15px;">від 6 грн/ткм</p>
                 </div>
-                <button class="add-to-cart" onclick="addToCart('carrot', 'Морква', 30)">В кошик</button>
-            </div>
-            
-            <div class="product-card">
-                <div class="product-image">🍓</div>
-                <div class="product-title">Полуниця</div>
-                <div class="product-price">80 грн/кг</div>
-                <div class="quantity">
-                    <button class="quantity-btn" onclick="changeQuantity('strawberry', -1)">-</button>
-                    <input type="number" id="strawberry-qty" class="quantity-input" value="0" min="0">
-                    <button class="quantity-btn" onclick="changeQuantity('strawberry', 1)">+</button>
+                
+                <div class="service-card">
+                    <div class="service-icon">🚛</div>
+                    <div class="service-title">Міжнародні перевезення</div>
+                    <p>Європа, країни СНД, Балтійські країни</p>
+                    <p style="color: #FF6D00; font-weight: bold; margin-top: 15px;">від 0.3 €/ткм</p>
                 </div>
-                <button class="add-to-cart" onclick="addToCart('strawberry', 'Полуниця', 80)">В кошик</button>
-            </div>
-            
-            <div class="product-card">
-                <div class="product-image">🥚</div>
-                <div class="product-title">Яйця фермерські</div>
-                <div class="product-price">65 грн/десяток</div>
-                <div class="quantity">
-                    <button class="quantity-btn" onclick="changeQuantity('eggs', -1)">-</button>
-                    <input type="number" id="eggs-qty" class="quantity-input" value="0" min="0">
-                    <button class="quantity-btn" onclick="changeQuantity('eggs', 1)">+</button>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔄</div>
+                    <div class="service-title">Логістичний супровід</div>
+                    <p>Планування маршрутів, документи, митне оформлення</p>
+                    <p style="color: #FF6D00; font-weight: bold; margin-top: 15px;">від 1000 грн</p>
                 </div>
-                <button class="add-to-cart" onclick="addToCart('eggs', 'Яйця', 65)">В кошик</button>
+                
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <div class="service-title">Страхування вантажів</div>
+                    <p>Повне страхування від усіх ризиків</p>
+                    <p style="color: #FF6D00; font-weight: bold; margin-top: 15px;">1.5% від вартості</p>
+                </div>
             </div>
         </div>
         
-        <div class="cart" id="cart">
-            <h2 style="text-align: center; margin-bottom: 20px;">🛒 Ваше Замовлення</h2>
-            <div id="cart-items"></div>
-            <div id="cart-total" style="text-align: center; font-size: 1.2em; font-weight: bold; margin: 20px 0;"></div>
-            <button class="checkout-btn" onclick="checkout()">✅ Оформити Замовлення</button>
+        <div class="calculator" id="calculator">
+            <h2>🧮 Калькулятор Вартості</h2>
+            
+            <div class="form-group">
+                <label>Тип продукції:</label>
+                <select id="product-type">
+                    <option value="5">Зернові (пшениця, ячмінь, кукурудза)</option>
+                    <option value="7">Овочі та фрукти</option>
+                    <option value="6">Олійні культури (соняшник, ріпак)</option>
+                    <option value="8">Соя</option>
+                    <option value="9">Спеціальні культури</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Відстань (км):</label>
+                <input type="number" id="distance" min="1" max="5000" value="100">
+            </div>
+            
+            <div class="form-group">
+                <label>Вага вантажу (тонн):</label>
+                <input type="number" id="weight" min="1" max="1000" value="20">
+            </div>
+            
+            <div class="form-group">
+                <label>Тип транспорту:</label>
+                <select id="transport-type">
+                    <option value="1.0">Стандартна фура (20-22т)</option>
+                    <option value="1.2">Рефрижератор</option>
+                    <option value="1.5">Спеціальний транспорт</option>
+                    <option value="0.9">Еко-транспорт (опт)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Терміновість:</label>
+                <select id="urgency">
+                    <option value="1.0">Стандарт (3-5 днів)</option>
+                    <option value="1.3">Експрес (1-2 дні)</option>
+                    <option value="1.7">Терміново (24 години)</option>
+                </select>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculatePrice()">Розрахувати вартість</button>
+            
+            <div class="result" id="result">
+                <h3>💳 Розрахункова вартість</h3>
+                <div class="price" id="final-price">0 грн</div>
+                <p id="calculation-details"></p>
+                <button class="btn" onclick="scrollToOrder()">Перейти до замовлення</button>
+            </div>
         </div>
         
-        <div id="contact" style="text-align: center; margin: 50px 0; color: white;">
-            <h2>📞 Контакти</h2>
-            <p>Телефон: +380 (12) 345-67-89</p>
-            <p>Email: info@колхозник.укр</p>
-            <p>Адреса: с. Свіже, вул. Фермерська, 1</p>
+        <div class="order-form" id="order">
+            <h2>📦 Форма Замовлення</h2>
+            
+            <div class="form-group">
+                <label>Ваше ім'я:</label>
+                <input type="text" id="client-name" placeholder="Введіть ваше ім'я">
+            </div>
+            
+            <div class="form-group">
+                <label>Телефон:</label>
+                <input type="tel" id="client-phone" placeholder="+380 (__) ___ __ __">
+            </div>
+            
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" id="client-email" placeholder="ваш@email.com">
+            </div>
+            
+            <div class="form-group">
+                <label>Місце завантаження:</label>
+                <input type="text" id="loading-place" placeholder="Місто, адреса">
+            </div>
+            
+            <div class="form-group">
+                <label>Місце розвантаження:</label>
+                <input type="text" id="unloading-place" placeholder="Місто, адреса">
+            </div>
+            
+            <div class="form-group">
+                <label>Додаткові побажання:</label>
+                <textarea id="comments" rows="4" placeholder="Особливості вантажу, додаткові послуги..."></textarea>
+            </div>
+            
+            <button class="calculate-btn" onclick="submitOrder()">📋 Надіслати заявку</button>
+        </div>
+        
+        <div id="contact">
+            <h2 style="text-align: center; color: white; margin: 50px 0;">📞 Контактна Інформація</h2>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <h3>Телефон</h3>
+                    <p>+380 (44) 123-45-67</p>
+                    <p>+380 (67) 890-12-34</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>info@agrologistics.ua</p>
+                    <p>orders@agrologistics.ua</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🏢</div>
+                    <h3>Адреса</h3>
+                    <p>м. Київ, вул. Логістична, 15</p>
+                    <p>Офіс 305</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <h3>Графік роботи</h3>
+                    <p>Пн-Пт: 8:00-20:00</p>
+                    <p>Сб-Нд: 9:00-18:00</p>
+                </div>
+            </div>
         </div>
     </div>
     
     <div class="footer">
-        <p>© 2024 КОЛХОЗНИК. Всі права захищено</p>
+        <p>© 2024 AgroLogistics. Всі права захищено</p>
+        <p>Ліцензія Міністерства інфраструктури №123456</p>
     </div>
 
     <script>
-        let cart = [];
-        
-        function changeQuantity(product, delta) {
-            const input = document.getElementById(product + '-qty');
-            let value = parseInt(input.value) + delta;
-            if (value < 0) value = 0;
-            input.value = value;
-        }
-        
-        function addToCart(id, name, price) {
-            const quantity = parseInt(document.getElementById(id + '-qty').value);
-            if (quantity === 0) return;
+        function calculatePrice() {
+            const productPrice = parseFloat(document.getElementById('product-type').value);
+            const distance = parseFloat(document.getElementById('distance').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const transportMultiplier = parseFloat(document.getElementById('transport-type').value);
+            const urgencyMultiplier = parseFloat(document.getElementById('urgency').value);
             
-            const existingItem = cart.find(item => item.id === id);
-            if (existingItem) {
-                existingItem.quantity += quantity;
-            } else {
-                cart.push({
-                    id: id,
-                    name: name,
-                    price: price,
-                    quantity: quantity
-                });
-            }
+            // Розрахунок базової вартості
+            let basePrice = productPrice * distance * weight;
             
-            document.getElementById(id + '-qty').value = 0;
-            updateCart();
-        }
-        
-        function updateCart() {
-            const cartItems = document.getElementById('cart-items');
-            const cartTotal = document.getElementById('cart-total');
+            // Застосування коефіцієнтів
+            let finalPrice = basePrice * transportMultiplier * urgencyMultiplier;
             
-            cartItems.innerHTML = '';
-            let total = 0;
+            // Округлення
+            finalPrice = Math.round(finalPrice);
             
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p style="text-align: center; color: #666;">Кошик порожній</p>';
-                cartTotal.textContent = '';
-                return;
-            }
-            
-            cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                
-                const itemElement = document.createElement('div');
-                itemElement.className = 'cart-item';
-                itemElement.innerHTML = `
-                    <span>${item.name} x ${item.quantity}</span>
-                    <span>${itemTotal} грн</span>
-                `;
-                cartItems.appendChild(itemElement);
-            });
-            
-            cartTotal.textContent = `Загальна сума: ${total} грн`;
-        }
-        
-        function checkout() {
-            if (cart.length === 0) {
-                alert('Додайте товари до кошика!');
-                return;
-            }
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const orderDetails = cart.map(item => 
-                `${item.name} x ${item.quantity} = ${item.price * item.quantity} грн`
-            ).join('\n');
-            
-            alert(`✅ ЗАМОВЛЕННЯ ОФОРМЛЕНО!\n\n${orderDetails}\n\n💰 Загальна сума: ${total} грн\n\nДякуємо за замовлення! Очікуйте дзвінка для підтвердження.`);
-            
-            cart = [];
-            updateCart();
-        }
-        
-        // Ініціалізація кошика
-        updateCart();
-    </script>
-</body>
-</html>
+            // Показ результату
+            document.getElementById('final-price').textContent = finalPrice + ' грн';
+            document.getElementById('

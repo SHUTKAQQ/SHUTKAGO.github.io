@@ -440,95 +440,119 @@
         <p>Ліцензія Міністерства інфраструктури №123456</p>
     </div>
 
-    <script>
-        function calculatePrice() {
-            const productPrice = parseFloat(document.getElementById('product-type').value);
-            const distance = parseFloat(document.getElementById('distance').value);
-            const weight = parseFloat(document.getElementById('weight').value);
-            const transportMultiplier = parseFloat(document.getElementById('transport-type').value);
-            const urgencyMultiplier = parseFloat(document.getElementById('urgency').value);
-            
-            // Розрахунок базової вартості
-            let basePrice = productPrice * distance * weight;
-            
-            // Застосування коефіцієнтів
-            let finalPrice = basePrice * transportMultiplier * urgencyMultiplier;
-            
-            // Округлення
-            finalPrice = Math.round(finalPrice);
-            
-            // Показ результату
-            document.getElementById('final-price').textContent = finalPrice + ' грн';
-            document.getElementById('calculation-details').innerHTML = `
-                <strong>Деталі розрахунку:</strong><br>
-                Базова ставка: ${productPrice} грн/ткм<br>
-                Відстань: ${distance} км<br>
-                Вага: ${weight} т<br>
-                Мультиплікатор транспорту: ${transportMultiplier}x<br>
-                Мультиплікатор терміновості: ${urgencyMultiplier}x
-            `;
-            document.getElementById('result').style.display = 'block';
-        }
+   <script>
+    function calculatePrice() {
+        const productPrice = parseFloat(document.getElementById('product-type').value);
+        const distance = parseFloat(document.getElementById('distance').value);
+        const weight = parseFloat(document.getElementById('weight').value);
+        const transportMultiplier = parseFloat(document.getElementById('transport-type').value);
+        const urgencyMultiplier = parseFloat(document.getElementById('urgency').value);
         
-        function scrollToOrder() {
-            document.getElementById('order').scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
+        let basePrice = productPrice * distance * weight;
+        let finalPrice = basePrice * transportMultiplier * urgencyMultiplier;
+        finalPrice = Math.round(finalPrice);
         
-        function submitOrder() {
-            const name = document.getElementById('client-name').value;
-            const phone = document.getElementById('client-phone').value;
-            const email = document.getElementById('client-email').value;
-            const loading = document.getElementById('loading-place').value;
-            const unloading = document.getElementById('unloading-place').value;
-            const comments = document.getElementById('comments').value;
-            const price = document.getElementById('final-price').textContent;
+        document.getElementById('final-price').textContent = finalPrice + ' грн';
+        document.getElementById('calculation-details').innerHTML = `
+            <strong>Деталі розрахунку:</strong><br>
+            Базова ставка: ${productPrice} грн/ткм<br>
+            Відстань: ${distance} км<br>
+            Вага: ${weight} т<br>
+            Мультиплікатор транспорту: ${transportMultiplier}x<br>
+            Мультиплікатор терміновості: ${urgencyMultiplier}x
+        `;
+        document.getElementById('result').style.display = 'block';
+    }
+    
+    function scrollToOrder() {
+        document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    async function submitOrder() {
+        const name = document.getElementById('client-name').value;
+        const phone = document.getElementById('client-phone').value;
+        const email = document.getElementById('client-email').value;
+        const loading = document.getElementById('loading-place').value;
+        const unloading = document.getElementById('unloading-place').value;
+        const comments = document.getElementById('comments').value;
+        const price = document.getElementById('final-price').textContent;
+        
+        if (!name || !phone || !loading || !unloading) {
+            alert('Будь ласка, заповніть обов\'язкові поля');
+            return;
+        }
+
+        // 🔽 ЗАМІНИ ЦЕЙ EMAIL НА СВІЙ!
+        const yourEmail = "mishazmerz@gmail.com";
+
+        const subject = "Нове замовлення перевезення";
+        const body = `
+            НОВЕ ЗАМОВЛЕННЯ:
             
-            if (!name || !phone || !loading || !unloading) {
-                alert('Будь ласка, заповніть обов\'язкові поля: ім\'я, телефон, місця завантаження та розвантаження');
-                return;
-            }
+            👤 Клієнт: ${name}
+            📞 Телефон: ${phone}
+            📧 Email: ${email || 'Не вказано'}
             
+            🚚 Маршрут:
+            Завантаження: ${loading}
+            Розвантаження: ${unloading}
+            
+            💰 Вартість: ${price}
+            
+            💬 Коментар: ${comments || 'Відсутній'}
+            
+            📅 Дата: ${new Date().toLocaleString()}
+        `;
+
+        try {
+            await sendEmail(yourEmail, subject, body);
+            alert('✅ Заявка відправлена! Ми зв\'яжемося з вами протягом 15 хвилин.');
+        } catch (error) {
             const orderDetails = `
-                ✅ ЗАЯВКА ПРИЙНЯТА!
-                
-                📋 Деталі замовлення:
+                📋 ЗАМОВЛЕННЯ:
                 Ім'я: ${name}
                 Телефон: ${phone}
                 Email: ${email || 'Не вказано'}
-                
-                🚚 Маршрут:
                 Завантаження: ${loading}
                 Розвантаження: ${unloading}
+                Вартість: ${price}
                 
-                💰 Розрахункова вартість: ${price}
-                
-                💬 Коментар: ${comments || 'Відсутній'}
-                
-                Дякуємо за заявку! Наш менеджер зв'яжеться з вами протягом 15 хвилин.
+                📧 Надішліть ці дані на: ${yourEmail}
+                📞 Або зателефонуйте: +380 (99) 123-45-67
             `;
-            
             alert(orderDetails);
-            
-            // Очищення форми
-            document.getElementById('client-name').value = '';
-            document.getElementById('client-phone').value = '';
-            document.getElementById('client-email').value = '';
-            document.getElementById('loading-place').value = '';
-            document.getElementById('unloading-place').value = '';
-            document.getElementById('comments').value = '';
         }
+
+        document.getElementById('client-name').value = '';
+        document.getElementById('client-phone').value = '';
+        document.getElementById('client-email').value = '';
+        document.getElementById('loading-place').value = '';
+        document.getElementById('unloading-place').value = '';
+        document.getElementById('comments').value = '';
+    }
+
+    async function sendEmail(email, subject, body) {
+        const serviceID = 'default_service';
+        const templateID = 'template_agrologistics';
         
-        // Автоматичний розрахунок при зміні значень
-        document.getElementById('product-type').addEventListener('change', calculatePrice);
-        document.getElementById('distance').addEventListener('input', calculatePrice);
-        document.getElementById('weight').addEventListener('input', calculatePrice);
-        document.getElementById('transport-type').addEventListener('change', calculatePrice);
-        document.getElementById('urgency').addEventListener('change', calculatePrice);
-        
-        // Початковий розрахунок
-        calculatePrice();
-    </script>
+        try {
+            emailjs.send(serviceID, templateID, {
+                to_email: email,
+                subject: subject,
+                message: body
+            });
+            return true;
+        } catch (error) {
+            throw new Error('Email service error');
+        }
+    }
+
+    document.getElementById('product-type').addEventListener('change', calculatePrice);
+    document.getElementById('distance').addEventListener('input', calculatePrice);
+    document.getElementById('weight').addEventListener('input', calculatePrice);
+    document.getElementById('transport-type').addEventListener('change', calculatePrice);
+    document.getElementById('urgency').addEventListener('change', calculatePrice);
+    calculatePrice();
+</script>
 </body>
 </html>

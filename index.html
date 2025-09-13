@@ -459,4 +459,76 @@
             
             // Показ результату
             document.getElementById('final-price').textContent = finalPrice + ' грн';
-            document.getElementById('
+            document.getElementById('calculation-details').innerHTML = `
+                <strong>Деталі розрахунку:</strong><br>
+                Базова ставка: ${productPrice} грн/ткм<br>
+                Відстань: ${distance} км<br>
+                Вага: ${weight} т<br>
+                Мультиплікатор транспорту: ${transportMultiplier}x<br>
+                Мультиплікатор терміновості: ${urgencyMultiplier}x
+            `;
+            document.getElementById('result').style.display = 'block';
+        }
+        
+        function scrollToOrder() {
+            document.getElementById('order').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        function submitOrder() {
+            const name = document.getElementById('client-name').value;
+            const phone = document.getElementById('client-phone').value;
+            const email = document.getElementById('client-email').value;
+            const loading = document.getElementById('loading-place').value;
+            const unloading = document.getElementById('unloading-place').value;
+            const comments = document.getElementById('comments').value;
+            const price = document.getElementById('final-price').textContent;
+            
+            if (!name || !phone || !loading || !unloading) {
+                alert('Будь ласка, заповніть обов\'язкові поля: ім\'я, телефон, місця завантаження та розвантаження');
+                return;
+            }
+            
+            const orderDetails = `
+                ✅ ЗАЯВКА ПРИЙНЯТА!
+                
+                📋 Деталі замовлення:
+                Ім'я: ${name}
+                Телефон: ${phone}
+                Email: ${email || 'Не вказано'}
+                
+                🚚 Маршрут:
+                Завантаження: ${loading}
+                Розвантаження: ${unloading}
+                
+                💰 Розрахункова вартість: ${price}
+                
+                💬 Коментар: ${comments || 'Відсутній'}
+                
+                Дякуємо за заявку! Наш менеджер зв'яжеться з вами протягом 15 хвилин.
+            `;
+            
+            alert(orderDetails);
+            
+            // Очищення форми
+            document.getElementById('client-name').value = '';
+            document.getElementById('client-phone').value = '';
+            document.getElementById('client-email').value = '';
+            document.getElementById('loading-place').value = '';
+            document.getElementById('unloading-place').value = '';
+            document.getElementById('comments').value = '';
+        }
+        
+        // Автоматичний розрахунок при зміні значень
+        document.getElementById('product-type').addEventListener('change', calculatePrice);
+        document.getElementById('distance').addEventListener('input', calculatePrice);
+        document.getElementById('weight').addEventListener('input', calculatePrice);
+        document.getElementById('transport-type').addEventListener('change', calculatePrice);
+        document.getElementById('urgency').addEventListener('change', calculatePrice);
+        
+        // Початковий розрахунок
+        calculatePrice();
+    </script>
+</body>
+</html>
